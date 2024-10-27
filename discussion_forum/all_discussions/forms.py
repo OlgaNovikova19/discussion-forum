@@ -32,7 +32,7 @@ class CommentForm(ModelForm):
 
 class LoginUserForm(Form):
     username = CharField(label='Login', widget=TextInput(attrs={'class':'form-input'}))
-    password = CharField(label='Login', widget=PasswordInput(attrs={'class': 'form-input'}))
+    password = CharField(label='Password', widget=PasswordInput(attrs={'class': 'form-input'}))
 
 class RegisterUserForm(UserCreationForm):
     username = CharField(label='Login', widget=TextInput(attrs={'class': 'form-input'}))

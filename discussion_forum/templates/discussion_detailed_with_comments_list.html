@@ -19,6 +19,23 @@
 
 </head>
 <body>
+{% if user.is_authenticated %}
+<h3> You are logged in as {{user.username}} </h3>
+<a href="{% url 'discussions:add_discussion' %}">
+    <button type="button">Create your own discussion topic</button>
+</a>
+<a href="{% url 'users:logout' %}">
+    <button type="button">logout</button>
+</a>
+{% else %}
+<h3> You are not logged in</h3>
+<a href="{% url 'users:login' %}">
+    <button type="button">login</button>
+</a>
+<a href="{% url 'users:register' %}">
+    <button type="button">Registration</button>
+</a>
+{% endif %}
 <div class="container">
     <div class="discussions-container">
         <h1 class="discussion-title">{{ discussion.subject_name }}</h1>
@@ -61,8 +78,6 @@
 
                     {% endfor %}
                     </p>
-                    <p>{{request.COOKIES}}</p>
-                    <p>{{request}}</p>
                 </li>
             {% empty %}
                 <li class="no-comments">No comments yet.</li>
@@ -80,6 +95,12 @@
         </div>
         <a href="{% url 'discussions:all' %}">
             <button type="button">Return to other topics</button>
+        </a>
+       <a href="{% url 'users:login' %}">
+            <button type="button">Login</button>
+        </a>
+       <a href="{% url 'users:logout' %}">
+            <button type="button">Logout</button>
         </a>
    </div>
 </div>

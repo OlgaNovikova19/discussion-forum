@@ -44,6 +44,7 @@ def discussion_new(request):
 
 @login_required
 def add_reaction(request, object_id, object_type, reaction_type):
+    user_id = str(request.user.id)
     if object_type in request.COOKIES:
         object_with_reactions_ids_list = json.loads(request.COOKIES[object_type])
         if str(object_id) in object_with_reactions_ids_list:
@@ -139,7 +140,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('users:login')
+    return render(request, 'logout.html')
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm

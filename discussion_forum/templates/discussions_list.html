@@ -8,6 +8,26 @@
     <link rel="stylesheet" href="{% static 'discussions_list.css' %}">
 </head>
 <body>
+      {% if user.is_authenticated %}
+    <h3> You are logged in as {{user.username}} </h3>
+    <a href="{% url 'discussions:add_discussion' %}">
+    <button type="button">Create your own discussion topic</button>
+    </a>
+    <a href="{% url 'users:logout' %}">
+        <button type="button">logout</button>
+    </a>
+    {% else %}
+    <h3> You are not logged in</h3>
+    <a href="{% url 'users:login' %}">
+    <button type="button">login</button>
+    </a>
+    <a href="{% url 'users:register' %}">
+        <button type="button">Registration</button>
+    </a>
+    {% endif %}
+
+
+
     <h1>
         <span class="fast-flicker">Re</span>c
         <span class="flicker">e</span>nt</h1>

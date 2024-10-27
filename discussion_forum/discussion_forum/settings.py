@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = None
+SECRET_KEY = 'django-insecure-r%cmii3(4s)=en#f4735xa$$+vp_uij5edg=i76u5=32et#cl('
 
 if SECRET_KEY is None:
     print("Please set secret key for Django web server!")

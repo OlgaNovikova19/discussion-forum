@@ -1,0 +1,52 @@
+body {
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background: linear-gradient(to right, #00aaff, #0044ff); /* Blue gradient background */
+    font-family: Arial, sans-serif; /* Font styling */
+    color: black; /* Text color */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Style the h1 element */
+h1 {
+    font-size: 3rem; /* Increase font size */
+    font-weight: bold; /* Bold font */
+    margin: 20px 0; /* Add margin above and below */
+    align-self: flex-start; /* Align to the left */
+    padding-left: 20px; /* Add padding to the left */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+/* Style the form */
+.login-form {
+    background: rgba(255, 255, 255, 0.9); /* Slightly opaque background for the form */
+    padding: 30px; /* Increase padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    width: 400px; /* Increase width of the form */
+    min-height: 300px; /* Ensure a minimum height */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack form elements vertically */
+    gap: 15px; /* Space between form elements */
+}
+
+/* Style the button */
+.submit-button {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 12px; /* Increase button padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 100%; /* Full width */
+    font-size: 18px; /* Font size */
+}
+
+/* Button hover effect */
+.submit-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+

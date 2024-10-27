@@ -1,0 +1,49 @@
+body {
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Stack elements vertically */
+        justify-content: center; /* Center elements vertically */
+        align-items: center; /* Center elements horizontally */
+        height: 100vh; /* Full viewport height */
+        margin: 0; /* Remove default margin */
+        background: linear-gradient(to right, #00aaff, #0044ff); /* Gradient background */
+        color: white; /* Text color */
+        font-family: Arial, sans-serif; /* Font styling */
+    }
+
+    h1 {
+        font-size: 4rem; /* Increase font size */
+        font-weight: bold; /* Bold font */
+        text-align: center; /* Center text */
+        text-shadow:
+            2px 2px 0px rgba(0, 0, 0, 0.5), /* Dark shadow */
+            3px 3px 0px rgba(255, 255, 255, 0.2); /* Light shadow for depth */
+        margin-bottom: 30px; /* Space below the heading */
+    }
+
+    button {
+        background-color: #007bff; /* Button background color */
+        color: white; /* Button text color */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 15px 25px; /* Button padding */
+        margin: 10px; /* Space between buttons */
+        cursor: pointer; /* Pointer cursor on hover */
+        font-size: 18px; /* Button font size */
+        box-shadow:
+            0 4px 6px rgba(0, 0, 0, 0.3), /* Shadow for depth */
+            0 1px 3px rgba(0, 0, 0, 0.2); /* Additional shadow for a 3D effect */
+        transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    }
+
+    button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        transform: translateY(-2px); /* Lift effect on hover */
+    }
+
+    button:active {
+        transform: translateY(1px); /* Pressed effect */
+    }
+
+    a {
+        text-decoration: none; /* Remove underline from links */
+    }

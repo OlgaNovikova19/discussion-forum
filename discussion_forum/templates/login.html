@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Authorization</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 
 </head>
 <body>
-    <h1> Authorization</h1>
+    <h1> Authorization </h1>
     <form action="{% url 'users:login' %}" method="post" class="login-form">
         <!--{% csrf_token %}-->
         {{ form.as_p }}

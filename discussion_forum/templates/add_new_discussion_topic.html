@@ -18,6 +18,23 @@
 
 </head>
 <body>
+    {% if user.is_authenticated %}
+    <h3> You are logged in as {{user.username}} </h3>
+    <a href="{% url 'discussions:all' %}">
+    <button type="button">To all topics</button>
+    </a>
+    <a href="{% url 'users:logout' %}">
+        <button type="button">logout</button>
+    </a>
+    {% else %}
+    <h3> You are not logged in</h3>
+    <a href="{% url 'users:login' %}">
+    <button type="button">login</button>
+    </a>
+    <a href="{% url 'users:register' %}">
+        <button type="button">Registration</button>
+    </a>
+    {% endif %}
     <div class="general-container">
         <div class="main-header">
             <h2>New discussion topic</h2>
@@ -92,7 +109,7 @@
 
                         </div>
                         <button type="button" class="toolbar-btn" onclick="toggleEmojiDropdown()">
-                            <img src="{% static 'emoji_icon.png' %}" width="15px" height="15px" alt="Emoji" />
+                            <img src="{% static '/images/emoji/smile.png' %}" width="15px" height="15px" alt="Emoji" />
                         </button>
                         <div id="emojiDropdown" class="emoji-dropdown" style="display: none;">
                             <span onclick="insertEmoji('😊', 'textEditor')">😊</span>
