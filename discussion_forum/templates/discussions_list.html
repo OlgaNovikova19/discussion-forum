@@ -1,0 +1,41 @@
+{% load static %}
+{% load custom_filters %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'discussions_list.css' %}">
+</head>
+<body>
+    <h1>
+        <span class="fast-flicker">Re</span>c
+        <span class="flicker">e</span>nt</h1>
+    <h2><span class="flicker">top</span>i
+        <span class="flicker">c</span>s
+    </h2>
+
+    {% for i in object_list %}
+    <div class = 'paper'>
+         <p>
+
+         </p>
+
+        <h3><a href="{% url 'discussions:discussion_detailed' i.id %}">{{ i.subject_name }}</a> </h3> started by {{i.author}}
+        {{i.discussion_creation_time}}
+        {% for reaction_type in i.discussion_reactions %}
+        <p>
+                <img src ="{% static 'images/emoji/'|add:reaction_type|add:'.png'%}" width="25px" height="25px">
+                {{ i.discussion_reactions|dict_key:reaction_type }}
+        </p>
+        {% endfor %}
+        <p>Number of comments: {{ i.comments.count }}</p>
+        {%  if i.comments.count != 0 %}
+            <p>The last comment by {{ i.comments.last.comment_author}}: {{ i.comments.last.comment_time }}</p>
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+</body>
+</html>

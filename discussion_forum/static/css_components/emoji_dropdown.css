@@ -1,0 +1,24 @@
+.emoji-dropdown {
+    display: none; /* Ensure it's hidden by default */
+    position: absolute; /* Adjust as necessary */
+    z-index: 1000; /* Make sure it appears above other content */
+}
+
+
+
+.emoji-dropdown img {
+width: 20px;  /* Set width */
+height: 20px;
+cursor: pointer; /* Optional: change cursor on hover */
+}
+
+
+.emoji-dropdown span {
+    padding: 5px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.emoji-dropdown span:hover {
+    background-color: #f0f0f0;
+}

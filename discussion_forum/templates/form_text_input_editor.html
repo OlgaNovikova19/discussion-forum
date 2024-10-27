@@ -1,0 +1,75 @@
+{% load static %}
+{% load custom_filters %}
+
+
+
+<div class="form-group" id="form_text_input_editor">
+    <label for="textEditor">{{ form.text.label }}</label>
+    <div id="textEditor" contenteditable="true" class="text-editor" style="border: 1px solid #ccc; padding: 10px; min-height: 200px;"></div>
+    <!--<input type="hidden" name="text" id="textInput">-->
+    <input type="hidden" name="comment_text" id="textInput">
+    <!-- Toolbar for formatting text and image upload -->
+    <div class="toolbar">
+        <button onclick="startRecognition(event)">startRecognition</button>
+        <button onclick="speakText(event)">Read Text Aloud</button>
+        <button id="from_ai_button" type="button" onclick="sendTextToAPI()">from AI</button>
+        <button type="button" class="toolbar-btn" onclick="formatText('bold', 'textEditor')">
+            <img src="{% static 'bold.png' %}" width="15px" height="15px" alt="Bold" title="Bold"/>
+        </button>
+        <button type="button" class="toolbar-btn" onclick="formatText('italic', 'textEditor')">
+            <img src="{% static 'italic.png' %}" width="15px" height="15px" alt="Italic" title="Italic"/>
+        </button>
+        <button type="button" class="toolbar-btn" onclick="formatText('underline', 'textEditor')">
+            <img src="{% static 'underline.png' %}" width="15px" height="15px" alt="Underline" title="Underline"/>
+        </button>
+        <button type="button" class="toolbar-btn" onclick="formatText('strikethrough', 'textEditor')">
+            <img src="{% static 'strikethrough.png' %}" width="15px" height="15px" alt="Strikethrough" title = "Strikethrough"/>
+        </button>
+        <button type="button" class="toolbar-btn" onclick="insertImageFromURL('textEditor')">
+            <img src="{% static 'image_insertion.png' %}" width="15px" height="15px" alt="Insert Image from URL" title = "Insert image from URL"/>
+        </button>
+        <button type="button" class="toolbar-btn" onclick="document.getElementById('imageInput').click();">
+            <img src="{% static 'gallery.png' %}" width="15px" height="15px" alt="Find and insert Image" title = "Insert image from computer"/>
+        </button>
+        <input type="file" id="imageInput" class="toolbar-btn" accept="image/*" style="display: none;" onchange="insertImageFromComputer('textEditor')">
+        <button type="button" class="toolbar-btn" onclick="document.getElementById('textColorPicker').click();">
+            <img src="{% static 'text_colour.png' %}" width="15px" height="15px" alt="Forecolour" title = "Forecolour"/>
+        </button>
+        <input type="color" id="textColorPicker" style="display:none;" onchange="changeTextColor('textEditor')">
+        <button type="button" class="toolbar-btn" onclick="document.getElementById('hiliteColor').click();">
+            <img src="{% static 'paint.png' %}" width="15px" height="15px" alt="Backgroundcolour" title = "Backgroundcolour"/>
+        </button>
+        <input type="color" id="hiliteColor" style="display:none;" onchange="highlightText('textEditor')">
+        <button type="button" title = "Draw a picture" onclick="openDrawingCanvas()">Draw and Insert</button>
+
+        </div>
+        <button type="button" class="toolbar-btn" onclick="toggleEmojiDropdown()">
+            <img src="{% static '/images/emoji/smile.png' %}" width="15px" height="15px" alt="Insert emoji" title = "Insert emoji" />
+        </button>
+        <div id="emojiDropdown" class="emoji-dropdown" style="display: none;">
+            <span onclick="insertEmoji('😊', 'textEditor')">😊</span>
+            <span onclick="insertEmoji('😂', 'textEditor')">😂</span>
+            <span onclick="insertEmoji('😍', 'textEditor')">😍</span>
+            <span onclick="insertEmoji('👍', 'textEditor')">👍</span>
+            <span onclick="insertEmoji('🔥', 'textEditor')">🔥</span>
+            <span onclick="insertEmoji('😎', 'textEditor')">😎</span>
+            <span onclick="insertEmoji('💯', 'textEditor')">💯</span>
+        </div>
+
+        <!-- Hidden drawing canvas and controls -->
+        <div id="drawingContainer" style="display:none;">
+            <canvas id="drawingCanvas" width="900" height="300" style="border: 1px solid black;"></canvas>
+            <br>
+            <!-- Color Picker for Drawing Color -->
+            <input type="color" id="drawingColorPicker" value="#000000" onchange="changeDrawingColor()" title = "Select colour">
+
+            <label for="strokeWidth">Stroke Width:</label>
+            <input type="range" id="strokeWidth" min="1" max="20" value="1" oninput="updateStrokeWidth()" style="width: 100px;">
+
+            <button type="button" onclick="toggleEraser()">Toggle Eraser</button>
+            <button type="button" onclick="insertDrawing()">Insert Drawing</button>
+            <button type="button" onclick="closeDrawingCanvas()">Close Drawing Canvas</button>
+
+        </div>
+    </div>
+</div>

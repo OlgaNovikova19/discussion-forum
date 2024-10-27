@@ -1,0 +1,89 @@
+{% load static %}
+{% load custom_filters %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'discussion_detailed_with_comments_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css_components/emoji_dropdown.css' %}">
+    <script src="{% static 'js/canvas.js' %}" defer></script>
+    <script src="{% static 'js/emoji_dropdown.js' %}" defer></script>
+    <script src="{% static 'js/speech_to_text.js' %}" defer></script>
+    <script src="{% static 'js/text_to_speech.js' %}" defer></script>
+    <script src="{% static 'js/api_call_text_to_speech.js' %}" defer></script>
+    <script src="{% static 'js/formatting_text.js' %}" defer></script>
+    <script src="{% static 'js/providing_submit_from_contenteditable.js' %}" defer></script>
+    <script src="{% static 'js/image_insertion.js' %}" defer></script>
+    <script src="{% static 'js/quote_text.js' %}" defer></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="discussions-container">
+        <h1 class="discussion-title">{{ discussion.subject_name }}</h1>
+        <p class="discussion-author">Posted by: {{ discussion.author }}</p>
+        <p class="discussion-body">{{ discussion.text }}</p>
+        <p class="discussion-icons-reactions">
+            {% for reaction_type in reaction_types %}
+            <a href ='{% url "discussions:add_reaction" discussion.id "user_discussion" reaction_type %}?next=/discussions/detailed/{{ discussion.id }}/'>
+                <img src ="{% static 'images/emoji/'|add:reaction_type|add:'.png'%}" width="25px" height="25px">
+            </a> {{ discussion.discussion_reactions|default_if_none_dict|dict_key:reaction_type }}
+            {% endfor %}
+        </p>
+        <button onclick="speakText(event, '{{discussion.text}}')">Read Text Aloud</button>
+        <button id="from_ai_button" type="button" onclick="sendTextToAPI('{{discussion.text}}')">Read aloud AI</button>
+    </div>
+   <div class="comments-section">
+        <h2>Comments</h2>
+        <ul class="comments-list">
+            {% for comment in comments %}
+                <li class="comment">
+                    <div class="comment-author">{{ comment.comment_author }}:</div>
+                    <div class="comment-date-time">{{ comment.comment_time }}:</div>
+
+                    {% if comment.comment_text|is_base64_image %}
+                        {% with comment.comment_text|extract_base64_image as base64_image %}
+                            <div class="comment-text">
+                                <img src="{{ base64_image }}" alt="Comment image" style="max-width: 100%;" />
+                            </div>
+                        {% endwith %}
+                    {% else %}
+                        <div class="comment-text">{{ comment.comment_text }}</div>
+                        <button onclick="quoteText({{ comment.id }}, '{{comment.comment_text}}', '{{comment.comment_author}}')">Quote</button>
+                    {% endif %}
+                    <p class="comment-icons-reactions">
+                    {% for reaction_type in reaction_types %}
+                        <a href ='{% url "discussions:add_reaction" comment.id "user_comment" reaction_type %}?next=/discussions/detailed/{{ discussion.id }}/'>
+                            <img src ="{% static 'images/emoji/'|add:reaction_type|add:'.png'%}" width="20px" height="20px">
+                        </a>
+                    {{ comment.comment_reactions|default_if_none_dict|dict_key:reaction_type}}
+
+                    {% endfor %}
+                    </p>
+                    <p>{{request.COOKIES}}</p>
+                    <p>{{request}}</p>
+                </li>
+            {% empty %}
+                <li class="no-comments">No comments yet.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="comment-form-container">
+            <form action="{% url 'discussions:add_comment' discussion.id %}" method="post" class="comment-form">
+                <!--{% csrf_token %}-->
+
+                {% include 'form_text_input_editor.html' with comment=None form=form %}
+                <button type="submit" name="submit_button_comment" id="submit_button_comment" class="submit-button">Add a Comment</button>
+            </form>
+
+        </div>
+        <a href="{% url 'discussions:all' %}">
+            <button type="button">Return to other topics</button>
+        </a>
+   </div>
+</div>
+</body>
+</html>
+
+
