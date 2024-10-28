@@ -1,5 +1,6 @@
 // Function to format selected text
 function formatText(command, editorId) {
+    console.log("formatText");
     var editor = document.getElementById(editorId);
     editor.focus();
     document.execCommand(command, false, null);
@@ -13,6 +14,7 @@ document.querySelector('form').onsubmit = function() {
 
 
 function changeTextColor(editorId) {
+    console.log("changeTextColor");
     var editor = document.getElementById(editorId);
     var color = document.getElementById('textColorPicker').value;  // Get the selected color
     editor.focus();
@@ -20,6 +22,7 @@ function changeTextColor(editorId) {
 }
 
  function highlightText(editorId) {
+    console.log("highlightText");
     var editor = document.getElementById(editorId);
     var color = document.getElementById('hiliteColor').value;  // Get the selected color
     editor.focus();

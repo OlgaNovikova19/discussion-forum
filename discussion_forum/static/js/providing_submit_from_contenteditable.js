@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.addEventListener('click', function(event) {
                 event.preventDefault();  // Prevent the form from submitting (optional)
 
-                let provided_comment = document.getElementById('textEditor').innerText;
+                let provided_comment = document.getElementById('textEditor').innerHTML;
                 document.getElementById('textInput').value = provided_comment;
 
                 console.log('Comment submitted: ' + provided_comment);
